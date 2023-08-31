@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <title>login user</title>
+    <link rel="stylesheet" href="static/loginstyle.css">
+    </head>
+    <body>
+        welcome{{name}}
+        
+        <form action = "/login" method="POST" class="form">
+            <img src="/static/login icon.jpg" alt="Avatar" class="avatar">
+            <h1 id="heading">Login</h1>
+            <input type ="text" placeholder="Enter Username" name="username"> <br> <br>
+            <input type ="text" placeholder="Enter Password" name="password"> <br> <br>
+            <button type = "submit">login</button> <br>
+            <br>
+            <h3>Don't have an account?</h3><br>
+            <button> <a href="{{url_for('signUp')}}">register</a></button>
+
+        </form>
+    </body>
+</html>

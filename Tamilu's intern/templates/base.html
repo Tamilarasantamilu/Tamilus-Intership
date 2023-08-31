@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>WEATHER FORECAST</title>
+</head>
+<body>
+    
+       <h1 class="heading"><b>Know how the Weather feels like in your city!</b></h1>
+       <br>
+       <div id="form">
+        <div id="second">
+        <form action ="/getWeather" method="post" style="text-align:center" autocomplete="off">
+
+
+        <input list="cityDetails" type="text" placeholder="choose the city name" name="city" id="cityName" required ><br>
+        <datalist id="cityDetails">
+            <option value =" ">
+        </datalist>
+        <input type="submit" value="submit" class="button"><br><br>
+        <button> <a href="{{url_for('logoutUser')}}">LOGOUT</a></button>
+        </div>
+</div>
+       </form>
+        
+    <br>
+    <div id="big">
+    <script>
+        ipr = document.getElementById("cityName");
+        element = document.getElementById("cityDetails");
+        ipr.addEventListener("focus",autocomplete);
+        if({{w_isCityNotFound}}==1){
+        document.getElementById("big").style.display="none";
+        const content = document.createElement("h1");
+        content.setAttribute("id","content1")
+        content.innerHTML="sorry..you have entered wrong city";
+        document.getElementById("body").appendChild(content);
+        alert("wrong city name");
+        }
+        if({{w_isCityNotFound}}==2){
+        document.getElementById("big").style.display="none";
+        }
+        function autocomplete(){
+           var abc = new XMLHttpRequest();
+           
+           abc.open("GET", "https://api.npoint.io/88da607373d247d35bb4",true);
+           abc.onload=function(){
+           var cities = JSON.parse(this.responseText);
+           for(let i in cities){
+               list = document.createElement("option");
+               list.value=cities[i].name;
+               list.label= cities[i].subcountry + ' - ' + cities[i].country;
+               element.appendChild(list);
+               console.log(cities[i].name);
+           }
+           }
+           abc.send();
+           }
+           </script>
+           
+           
+    <div id="grid">
+        <table class="design">
+            <tr>
+                <td>{{w_name}}</td>
+                </tr>
+                <tr>
+                <td>{{w_state}}</td>
+                </tr>
+                <tr>
+                <td>{{w_country}}</td>
+                </tr>
+                <tr>
+                <td>{{w_temp}}{{w_celcius}}</td>
+                </tr>
+                <tr>
+                <td>{{w_condition}}</td>
+                </tr>
+                <tr>
+                <td>
+                    <img src={{w_image}}>
+                    </td>
+                </tr>
+            </th>
+        </table>
+       
+    </div>
+    </div>
+    
+</body>
+</html>
